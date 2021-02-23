@@ -1,0 +1,5 @@
+objectRepositories\GmailTriggerTest.class
+utilities\Helper.class
+objectRepositories\NewMessage.class
+objectRepositories\GmailHome.class
+objectRepositories\StackOverflow.class
