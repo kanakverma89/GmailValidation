@@ -111,7 +111,14 @@ public class StepDefTest {
 	    	   System.out.println(item.getText());
 	    	   if(name.contains("Send"))
 	    	   {
-	    		   item.click();
+	    		   try
+	    		   {
+	    			   item.click();
+	    		   }
+	    		   catch (Exception ex)
+	    		   {
+	    			   System.out.println(ex.getMessage());
+	    		   }
 	    	   }
 	       }
 	    }
