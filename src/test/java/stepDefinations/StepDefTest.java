@@ -1,10 +1,13 @@
 package stepDefinations;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -34,7 +37,7 @@ public class StepDefTest {
    
 	
 	@Given("^I have navigate to the below url in the browser\\.$")
-	public void i_have_navigate_to_the_below_url_in_the_browser(DataTable arg1) throws InterruptedException {
+	public void i_have_navigate_to_the_below_url_in_the_browser(DataTable arg1) throws InterruptedException, IOException {
 		// Write code here that turns the phrase above into concrete actions
 		// For automatic transformation, change DataTable to one of
 		// List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
@@ -52,9 +55,14 @@ public class StepDefTest {
 		driver.manage().window().maximize();
 		driver.get(_sb.toString());
 		GmailHome _gh = new GmailHome(driver);
-		_gh.Email().sendKeys("aufrwk@gmail.com");
+		Properties _prop=new Properties();
+		Path currentPath = Paths.get(System.getProperty("user.dir"));
+		Path filePathPropertiesFile = Paths.get(currentPath.toString(),"src\\main\\java\\utilities\\data.properties");
+		FileInputStream _fps=new FileInputStream(filePathPropertiesFile.toString());
+		_prop.load(_fps);
+		_gh.Email().sendKeys(_prop.getProperty("email"));
 		_gh.Next().click();
-		_gh.Password().sendKeys("winter@2020");
+		_gh.Password().sendKeys(_prop.getProperty("password"));
 		_gh.NextBtnPsswd().click();
 
 	}
